@@ -8165,11 +8165,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sukhmandeep\\source\\repos\\MusicPlayer\\MusicPlayer\\MusicPlayer.csproj",
+      "projectUniqueName": "C:\\SHARES\\1302\\GitHub\\MusicPlayer\\MusicPlayer\\MusicPlayer.csproj",
       "projectName": "MusicPlayer",
-      "projectPath": "C:\\Users\\Sukhmandeep\\source\\repos\\MusicPlayer\\MusicPlayer\\MusicPlayer.csproj",
+      "projectPath": "C:\\SHARES\\1302\\GitHub\\MusicPlayer\\MusicPlayer\\MusicPlayer.csproj",
       "packagesPath": "C:\\Users\\Sukhmandeep\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sukhmandeep\\source\\repos\\MusicPlayer\\MusicPlayer\\obj\\",
+      "outputPath": "C:\\SHARES\\1302\\GitHub\\MusicPlayer\\MusicPlayer\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [

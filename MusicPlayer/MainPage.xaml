@@ -7,8 +7,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
 
-    <Grid>
+    <Grid Background="Black">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
+
+        <Grid Grid.Column="0" Background="#0D091D" CornerRadius="20">
+            <StackPanel x:Name="menuStackPanel" Height="Auto"></StackPanel>
+        </Grid>
+        
+        
+        
+        <Grid Grid.Column="1" MinWidth="400" >
+            <WebView x:Name="myWebView" />
+        </Grid>
     </Grid>
 </Page>
