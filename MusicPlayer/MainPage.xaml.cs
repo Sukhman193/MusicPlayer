@@ -221,5 +221,73 @@ namespace MusicPlayer
 
 
         }
+
+        private void WebViewButton_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            Button webViewSelected = (Button)sender;
+
+            string title = webViewSelected.Content.ToString();
+
+            string urlLink = "";
+
+            foreach(Links links in webViewLinks)
+            {
+                if(links.GetTitle() == title)
+                {
+                    urlLink = links.GetHtmlLink();
+                }
+                   
+            }
+
+            TextBlock textBlock = new TextBlock()
+            {
+                Text = "Edit the item",
+                HorizontalAlignment =Windows.UI.Xaml.HorizontalAlignment.Center,
+                FontFamily = new FontFamily("Cascadia Mono"),
+                FontSize = 30,
+                Margin = new Thickness { Bottom = 30 },
+            };
+
+            TextBox titleTextBox = new TextBox()
+            {
+                Text = title,
+                PlaceholderText = "Enter the name of the title",
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                Margin = new Thickness { Bottom = 30, Top = 30 },
+                FontSize = 30,
+                FontFamily = new FontFamily("Cascadia Mono"),
+            };
+
+            TextBox urlTextBox = new TextBox()
+            {
+                Text = urlLink,
+                PlaceholderText = "Enter the url",
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                Margin = new Thickness { Bottom = 30, Top = 30 },
+                FontFamily = new FontFamily("Cascadia Mono"),
+                FontSize = 30,
+
+            };
+
+            Button deleteButton = new Button()
+            {
+                Content = "Delete",
+                Background = new SolidColorBrush(Windows.UI.Colors.Red),
+            };
+
+            Button makeChanges = new Button()
+            {
+                Content = "Submit Changes",
+
+            };
+            
+            
+
+
+            webViewSettings.Children.Add(textBlock);
+            webViewSettings.Children.Add(titleTextBox);
+            webViewSettings.Children.Add(urlTextBox);
+
+        }
     }
 }

@@ -28,12 +28,14 @@
             <WebView x:Name="myWebView" NavigationStarting="myWebView_NavigationStarting" NavigationCompleted="myWebView_NavigationCompleted" Visibility="Collapsed" />
             <ProgressRing x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-            <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+            <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >
                 <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Cascadia Mono" Margin="10" />
                 <TextBox x:Name="titleInput" PlaceholderText="Enter Title here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30" />
                 <TextBox x:Name="linkInput" PlaceholderText="Enter URL link here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30"/>
                 <Button x:Name="Create" Click="Create_Click" Content="Create WebView" FontSize="30" FontFamily="Cascadia Mono" Margin="10" />
             </StackPanel>
+
+            <StackPanel x:Name="webViewSettings" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </Page>
