@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\SHARES\1302\GitHub\MusicPlayer\MusicPlayer\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-04-01T08:58:14.682</Modified>
+      <Modified>2022-04-02T00:16:46.185</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\SHARES\1302\GitHub\MusicPlayer\MusicPlayer\bin\x86\Debug\MusicPlayer.exe">
       <PackagePath>entrypoint\MusicPlayer.exe</PackagePath>
-      <Modified>2022-04-01T08:58:14.307</Modified>
+      <Modified>2022-04-02T00:16:45.817</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.12\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -86,15 +86,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\SHARES\1302\GitHub\MusicPlayer\MusicPlayer\bin\x86\Debug\MusicPlayer.xr.xml">
       <PackagePath>MusicPlayer.xr.xml</PackagePath>
-      <Modified>2022-04-01T08:55:08.616</Modified>
+      <Modified>2022-04-02T00:15:03.377</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\SHARES\1302\GitHub\MusicPlayer\MusicPlayer\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2022-04-01T08:58:14.260</Modified>
+      <Modified>2022-04-02T00:16:45.768</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\SHARES\1302\GitHub\MusicPlayer\MusicPlayer\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2022-04-01T08:58:14.260</Modified>
+      <Modified>2022-04-02T00:16:45.768</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -106,7 +106,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\SHARES\1302\GitHub\MusicPlayer\MusicPlayer\bin\x86\Debug\Core\MusicPlayer.exe">
       <PackagePath>MusicPlayer.exe</PackagePath>
-      <Modified>2022-04-01T08:58:14.682</Modified>
+      <Modified>2022-04-02T00:16:46.183</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

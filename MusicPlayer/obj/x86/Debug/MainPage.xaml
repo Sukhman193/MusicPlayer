@@ -9,22 +9,31 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
 
-    <Grid Background="Black">
+    <Grid Background="AliceBlue">
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-
-        <Grid Grid.Column="0" Background="#0D091D" CornerRadius="20">
-            <StackPanel x:ConnectionId='3' x:Name="menuStackPanel" Height="Auto"></StackPanel>
+        
+        <Grid x:ConnectionId='2' x:Name="menuGrid" Grid.Column="0" Background="CornflowerBlue"  CornerRadius="20">
+            <StackPanel x:ConnectionId='9' x:Name="menuStackPanel" Height="Auto"></StackPanel>
         </Grid>
         
         
         
         <Grid Grid.Column="1" MinWidth="400" >
-            <WebView x:ConnectionId='2' x:Name="myWebView" />
+            
+            <WebView x:ConnectionId='3' x:Name="myWebView"                                                                                                       Visibility="Collapsed" />
+            <ProgressRing x:ConnectionId='4' x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <StackPanel x:ConnectionId='5' x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Cascadia Mono" Margin="10" />
+                <TextBox x:ConnectionId='6' x:Name="titleInput" PlaceholderText="Enter Title here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30" />
+                <TextBox x:ConnectionId='7' x:Name="linkInput" PlaceholderText="Enter URL link here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30"/>
+                <Button x:ConnectionId='8' x:Name="Create"                      Content="Create WebView" FontSize="30" FontFamily="Cascadia Mono" Margin="10" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
