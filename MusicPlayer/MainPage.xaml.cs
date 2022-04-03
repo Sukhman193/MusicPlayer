@@ -25,6 +25,7 @@ namespace MusicPlayer
     {
         List<Links> webViewLinks;
         Button goBackButton;
+        StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;      // Put this with the other function
 
         public MainPage()
         {
@@ -35,7 +36,6 @@ namespace MusicPlayer
         // This function will retrieve the data from the application at startup
         private async void retrieveData()
         {
-            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             StorageFile myFile = await localFolder.CreateFileAsync("webViewLinks.txt", CreationCollisionOption.OpenIfExists);
             IList<string> allLinkList = await FileIO.ReadLinesAsync(myFile);
             webViewLinks = new List<Links>();  
@@ -47,6 +47,9 @@ namespace MusicPlayer
             }
             createButtons();
         }
+
+
+
         // The following function will create the necessary buttons from the data retrieved
         private void createButtons()
         {
@@ -93,6 +96,7 @@ namespace MusicPlayer
                     FocusVisualPrimaryBrush = new SolidColorBrush(Windows.UI.Colors.White)
                 };
                 btn.Click += WebViewButtonClick;
+                btn.RightTapped += WebViewButton_RightTapped;
                 btn.HorizontalAlignment = HorizontalAlignment.Center;
                 menuStackPanel.Children.Add((btn));
             }
@@ -126,6 +130,10 @@ namespace MusicPlayer
         // this function will trigger when the user selectrs a page to open
         private void WebViewButtonClick(object sender, RoutedEventArgs e)
         {
+            webViewSettings.Children.Clear();
+            webViewSettings.Visibility = Visibility.Collapsed;
+            addItemPanel.Visibility = Visibility.Collapsed;
+            myWebView.Visibility = Visibility.Visible;
 
             Button button = (Button)sender;
             string title = (string)button.Content;
@@ -137,7 +145,7 @@ namespace MusicPlayer
                     htmlLink = link.GetHtmlLink();
             }
 
-            addItemPanel.Visibility = Visibility.Collapsed;
+            
             myWebView.Navigate(new Uri(htmlLink));
         }
 
@@ -153,6 +161,8 @@ namespace MusicPlayer
         // This function will trigger when a webView Page ends loading
         private void myWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
+            webViewSettings.Children.Clear();
+            webViewSettings.Visibility = Visibility.Collapsed;
             progressRingWebView.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Visible;
             progressRingWebView.IsActive = false;
@@ -168,20 +178,23 @@ namespace MusicPlayer
         // This function will trigger when the user decides to create a new object
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
+            titleInput.Text = "";
+            linkInput.Text = "";
+            webViewSettings.Children.Clear();
+            webViewSettings.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Visible;
         }
         private async void saveData(string title, string htmlLink)
         {
-            StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;      // Put this with the other function
-            string fileData = "\n" + title + "/-}/" + htmlLink;
+            string fileData = title + "/-}/" + htmlLink + "\n";
             StorageFile myFile = await localFolder.CreateFileAsync("webViewLinks.txt", CreationCollisionOption.OpenIfExists);
             await FileIO.AppendTextAsync(myFile, fileData);
         }
 
         // This function will trigger when the user clicks on the Create new link button
         private void Create_Click(object sender, RoutedEventArgs e)
-        {
+        {   
             string _title = titleInput.Text;
             string _htmlLink = linkInput.Text;
             List<string> _titleList = new List<string>();
@@ -216,18 +229,25 @@ namespace MusicPlayer
                 FocusVisualPrimaryBrush = new SolidColorBrush(Windows.UI.Colors.White)
             };
             btn.Click += WebViewButtonClick;
+            btn.IsRightTapEnabled = true;
+            btn.RightTapped += WebViewButton_RightTapped;
             btn.HorizontalAlignment = HorizontalAlignment.Center;
             menuStackPanel.Children.Add((btn));
-
 
         }
 
         private void WebViewButton_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
+            // Hide any open page
+            webViewSettings.Children.Clear();
+            myWebView.Visibility = Visibility.Collapsed;
+            addItemPanel.Visibility = Visibility.Collapsed;
+            webViewSettings.Visibility = Visibility.Visible;
+
+
             Button webViewSelected = (Button)sender;
 
             string title = webViewSelected.Content.ToString();
-
             string urlLink = "";
 
             foreach(Links links in webViewLinks)
@@ -272,22 +292,64 @@ namespace MusicPlayer
             Button deleteButton = new Button()
             {
                 Content = "Delete",
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
                 Background = new SolidColorBrush(Windows.UI.Colors.Red),
+                Margin = new Thickness { Bottom = 30, Top = 30 },
             };
+            deleteButton.Click += DeleteButton_Click;
 
             Button makeChanges = new Button()
             {
                 Content = "Submit Changes",
-
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                Margin = new Thickness { Bottom = 30, Top = 30 },
             };
+            makeChanges.Click += MakeChanges_Click;
             
             
-
-
             webViewSettings.Children.Add(textBlock);
             webViewSettings.Children.Add(titleTextBox);
             webViewSettings.Children.Add(urlTextBox);
+            webViewSettings.Children.Add(deleteButton);
+            webViewSettings.Children.Add(makeChanges);
+        }
 
+
+        private void MakeChanges_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            StackPanel stackPanel = (StackPanel)button.Parent;
+            TextBox titleTextBox = (TextBox)stackPanel.Children[1];
+            TextBox urlTextBox = (TextBox)(stackPanel.Children[2]);
+
+            string title = titleTextBox.Text; 
+            string url = urlTextBox.Text;
+
+
+            webViewLinks.Remove(webViewLinks.Find(l => l.GetTitle() == title));
+            
+            StorageFile myFile = await localFolder.CreateFileAsync("webViewLinks.txt", CreationCollisionOption.ReplaceExisting);
+
+            foreach(Links links in webViewLinks)
+            {
+                saveData(links.GetTitle(), links.GetHtmlLink());
+            }
+
+            webViewSettings.Visibility = Visibility.Collapsed;
+            for (int i = 0; i < menuStackPanel.Children.Count; i++)
+            {
+                Button btn = (Button)menuStackPanel.Children[i];
+                if(btn.Content.ToString() == title)
+                {
+                    menuStackPanel.Children.RemoveAt(i);
+                }
+            }
+            
         }
     }
 }
