@@ -351,5 +351,15 @@ namespace MusicPlayer
             }
             
         }
+
+        private void Create_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            Create.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
+        }
+
+        private void Create_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            Create.Foreground = new SolidColorBrush(Windows.UI.Colors.Blue);
+        }
     }
 }

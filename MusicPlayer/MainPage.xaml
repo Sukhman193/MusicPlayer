@@ -29,10 +29,16 @@
             <ProgressRing x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >
-                <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Cascadia Mono" Margin="10" />
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Cascadia Mono" Margin="10" Foreground="Black"/>
                 <TextBox x:Name="titleInput" PlaceholderText="Enter Title here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30" />
                 <TextBox x:Name="linkInput" PlaceholderText="Enter URL link here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30"/>
-                <Button x:Name="Create" Click="Create_Click" Content="Create WebView" FontSize="30" FontFamily="Cascadia Mono" Margin="10" />
+                <Button x:Name="Create" Click="Create_Click" Content="Create WebView" FontSize="30" FontFamily="Cascadia Mono" Margin="10" Foreground="Black" Background="Coral" PointerEntered="Create_PointerEntered" PointerExited="Create_PointerExited"  />
             </StackPanel>
 
             <StackPanel x:Name="webViewSettings" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
