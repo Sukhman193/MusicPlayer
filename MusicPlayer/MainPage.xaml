@@ -24,14 +24,15 @@
 
 
         <Grid Grid.Column="1" MinWidth="400" >
-
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Padding="10">
             <MediaPlayerElement AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True"/>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" >
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" Margin="30 0 0 0" >
                 <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
-                <Button Background="Teal" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="20"></Button>
+                <Button Background="MediumPurple" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40"></Button>
+            </StackPanel>
             </StackPanel>
 
-            
+
             <WebView x:Name="myWebView" NavigationStarting="myWebView_NavigationStarting" NavigationCompleted="myWebView_NavigationCompleted" Visibility="Collapsed" />
             <ProgressRing x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
