@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -32,7 +36,33 @@ namespace MusicPlayer
             this.InitializeComponent();
             retrieveData();
         }
+        String paths, files;
 
+        private async void PickFilesButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.List;
+            openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            openPicker.FileTypeFilter.Add(".mp3");
+            IReadOnlyList<StorageFile> files = await openPicker.PickMultipleFilesAsync();
+            if(files.Count > 0)
+            {
+                StringBuilder output = new StringBuilder("Picked Files:\n");
+                foreach (StorageFile file in files)
+                {
+                    output.Append(file.Name + "\n");
+                    OutputList.Items.Add(file.Name);
+                }
+                
+            }
+        }
+        private void listBoxSongs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*String s = sender as String;
+            musicPlayerElement.Source = MediaSource.CreateFromUri(s);*/
+        }
+
+       
         // This function will retrieve the data from the application at startup
         private async void retrieveData()
         {

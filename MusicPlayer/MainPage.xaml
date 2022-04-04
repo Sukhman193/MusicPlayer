@@ -7,24 +7,30 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
 
     <Grid Background="AliceBlue">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        
+
         <Grid x:Name="menuGrid" Grid.Column="0" Background="CornflowerBlue"  CornerRadius="20">
             <StackPanel x:Name="menuStackPanel" Height="Auto"></StackPanel>
         </Grid>
-        
-        
-        
+
+
+
         <Grid Grid.Column="1" MinWidth="400" >
-            
+
+            <MediaPlayerElement x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True"/>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" >
+                <ListBox x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
+                <Button Background="Teal" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="20" Margin="0 10 0 0"></Button>
+            </StackPanel>
+
             <WebView x:Name="myWebView" NavigationStarting="myWebView_NavigationStarting" NavigationCompleted="myWebView_NavigationCompleted" Visibility="Collapsed" />
             <ProgressRing x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
