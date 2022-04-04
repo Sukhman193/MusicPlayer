@@ -30,21 +30,21 @@ namespace MusicPlayer
         List<Links> webViewLinks;
         Button goBackButton;
         StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;      // Put this with the other function
+        IReadOnlyList<StorageFile> files;
 
         public MainPage()
         {
             this.InitializeComponent();
             retrieveData();
         }
-        String paths, files;
 
         private async void PickFilesButton_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.List;
-            openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            openPicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
             openPicker.FileTypeFilter.Add(".mp3");
-            IReadOnlyList<StorageFile> files = await openPicker.PickMultipleFilesAsync();
+            files = await openPicker.PickMultipleFilesAsync();
             if(files.Count > 0)
             {
                 StringBuilder output = new StringBuilder("Picked Files:\n");
@@ -58,8 +58,15 @@ namespace MusicPlayer
         }
         private void listBoxSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*String s = sender as String;
-            musicPlayerElement.Source = MediaSource.CreateFromUri(s);*/
+            String s = sender as String;
+            for(int i =0; i < files.Count; i++)
+            {
+                if(files[i].Name == s)
+                {
+                    musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[i]);
+                }
+            }
+            
         }
 
        
