@@ -56,16 +56,19 @@ namespace MusicPlayer
                 
             }
         }
-        private void listBoxSongs_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBoxSongs_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             String s = sender as String;
-            for(int i =0; i < files.Count; i++)
+            
+                musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[OutputList.SelectedIndex]);
+            
+            /*for(int i =0; i < files.Count; i++)
             {
                 if(files[i].Name == s)
                 {
                     musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[i]);
                 }
-            }
+            }*/
             
         }
 
@@ -398,5 +401,8 @@ namespace MusicPlayer
         {
             Create.Foreground = new SolidColorBrush(Windows.UI.Colors.Blue);
         }
+
+        
+        
     }
 }
