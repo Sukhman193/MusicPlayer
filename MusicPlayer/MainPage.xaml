@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
@@ -24,12 +26,12 @@
 
 
         <Grid Grid.Column="1" MinWidth="400" >
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Padding="10">
-            <MediaPlayerElement AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True"/>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" Margin="30 0 0 0" >
-                <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
-                <Button Background="MediumPurple" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40"></Button>
-            </StackPanel>
+            <StackPanel x:Name="musicPanel" HorizontalAlignment="Center" Orientation="Horizontal" Padding="10">
+                <MediaPlayerElement AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True"/>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" Margin="30 0 0 0" >
+                    <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
+                    <Button Background="MediumPurple" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40"></Button>
+                </StackPanel>
             </StackPanel>
 
 
@@ -37,12 +39,6 @@
             <ProgressRing x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >
-                <StackPanel.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </StackPanel.Background>
                 <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Cascadia Mono" Margin="10" Foreground="Black"/>
                 <TextBox x:Name="titleInput" PlaceholderText="Enter Title here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30" />
                 <TextBox x:Name="linkInput" PlaceholderText="Enter URL link here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30"/>

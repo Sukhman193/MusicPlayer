@@ -32,12 +32,15 @@ namespace MusicPlayer
         StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;      // Put this with the other function
         IReadOnlyList<StorageFile> files;
 
+
         public MainPage()
         {
             this.InitializeComponent();
             retrieveData();
         }
 
+
+        // Pick the music library using FileOpenPicker();
         private async void PickFilesButton_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker openPicker = new FileOpenPicker();
@@ -56,20 +59,11 @@ namespace MusicPlayer
                 
             }
         }
+
+        // Play the music
         private void listBoxSongs_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
-        {
-            String s = sender as String;
-            
-                musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[OutputList.SelectedIndex]);
-            
-            /*for(int i =0; i < files.Count; i++)
-            {
-                if(files[i].Name == s)
-                {
-                    musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[i]);
-                }
-            }*/
-            
+        {           
+            musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[OutputList.SelectedIndex]);
         }
 
        
