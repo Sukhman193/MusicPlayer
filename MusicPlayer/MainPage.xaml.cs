@@ -89,16 +89,11 @@ namespace MusicPlayer
         {
             goBackButton = new Button
             {
-                Content = "<-",
-                Foreground = new SolidColorBrush(Windows.UI.Colors.Black),
-                Background = new SolidColorBrush(Windows.UI.Colors.Beige),
+                Content = "",
                 Name = "goBack",
-                Margin = new Thickness { Left = 0, Top = 5, Right = 0, Bottom = 5 },
-                Padding = new Thickness { Left = 10, Right = 10, Bottom = 10, Top = 10 },
-                FocusVisualPrimaryBrush = new SolidColorBrush(Windows.UI.Colors.White),
-                FocusVisualSecondaryBrush = new SolidColorBrush(Windows.UI.Colors.Blue),
-                HorizontalAlignment = HorizontalAlignment.Center,
-                IsEnabled = false
+                FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                IsEnabled = false,
+                Style = Application.Current.Resources["menuButtons"] as Style,
             };
             goBackButton.Click += GoBackButtonClick;
             menuStackPanel.Children.Add(goBackButton);
@@ -107,14 +102,10 @@ namespace MusicPlayer
             Button button1 = new Button
             {
                 Content = "Music",
-                Foreground = new SolidColorBrush(Windows.UI.Colors.Black),
-                Background = new SolidColorBrush(Windows.UI.Colors.Beige),
-                Margin = new Thickness { Left = 0, Top = 5, Right = 0, Bottom= 5 },
-                Padding = new Thickness { Left = 10, Right = 10, Bottom = 10, Top = 10 },
-                FocusVisualPrimaryBrush = new SolidColorBrush(Windows.UI.Colors.White),
                 Name = "Music",
-                HorizontalAlignment = HorizontalAlignment.Center
+                Style = Application.Current.Resources["menuButtons"] as Style
             };
+            button1.Click += Music_Click;
             menuStackPanel.Children.Add(button1);
 
 
@@ -123,11 +114,7 @@ namespace MusicPlayer
                 Button btn = new Button
                 {
                     Content = link.GetTitle(),
-                    Foreground = new SolidColorBrush(Windows.UI.Colors.Black),
-                    Margin = new Thickness { Left = 0, Top = 5, Right = 0, Bottom = 5 },
-                    Padding = new Thickness { Left = 10, Right = 10, Bottom = 10, Top = 10},
-                    Background = new SolidColorBrush(Windows.UI.Colors.Beige),
-                    FocusVisualPrimaryBrush = new SolidColorBrush(Windows.UI.Colors.White)
+                    Style = Application.Current.Resources["menuButtons"] as Style
                 };
                 btn.Click += WebViewButtonClick;
                 btn.RightTapped += WebViewButton_RightTapped;
@@ -138,16 +125,21 @@ namespace MusicPlayer
             Button addItem = new Button
             {
                 Content = "+",
-                FontSize = 30,
-                Foreground = new SolidColorBrush(Windows.UI.Colors.White),
-                Background = new SolidColorBrush(Windows.UI.Colors.DarkKhaki),
-                Margin = new Thickness { Bottom = 5 },
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Bottom
+                FontSize = 25,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Style = Application.Current.Resources["menuButtons"] as Style
             };
             addItem.Click += AddItem_Click;
             menuGrid.Children.Add(addItem);
             
+        }
+
+        private void Music_Click(object sender, RoutedEventArgs e)
+        {
+            musicPanel.Visibility = Visibility.Visible;
+            myWebView.Visibility = Visibility.Collapsed;
+            addItemPanel.Visibility = Visibility.Collapsed;
+            webViewSettings.Visibility = Visibility.Collapsed;
         }
 
 
@@ -165,6 +157,7 @@ namespace MusicPlayer
         private void WebViewButtonClick(object sender, RoutedEventArgs e)
         {
             webViewSettings.Children.Clear();
+            musicPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Visible;
@@ -215,6 +208,7 @@ namespace MusicPlayer
             titleInput.Text = "";
             linkInput.Text = "";
             webViewSettings.Children.Clear();
+            musicPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Visible;
@@ -256,16 +250,11 @@ namespace MusicPlayer
             Button btn = new Button
             {
                 Content = _title,
-                Foreground = new SolidColorBrush(Windows.UI.Colors.Black),
-                Margin = new Thickness { Left = 0, Top = 5, Right = 0, Bottom = 5 },
-                Padding = new Thickness { Left = 10, Right = 10, Bottom = 10, Top = 10 },
-                Background = new SolidColorBrush(Windows.UI.Colors.Beige),
-                FocusVisualPrimaryBrush = new SolidColorBrush(Windows.UI.Colors.White)
+                Style = Application.Current.Resources["menuButtons"] as Style,
             };
             btn.Click += WebViewButtonClick;
             btn.IsRightTapEnabled = true;
             btn.RightTapped += WebViewButton_RightTapped;
-            btn.HorizontalAlignment = HorizontalAlignment.Center;
             menuStackPanel.Children.Add((btn));
 
         }
@@ -274,6 +263,7 @@ namespace MusicPlayer
         {
             // Hide any open page
             webViewSettings.Children.Clear();
+            musicPanel.Visibility = Visibility.Collapsed; 
             myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Visible;
@@ -386,17 +376,20 @@ namespace MusicPlayer
             
         }
 
-        private void Create_PointerEntered(object sender, PointerRoutedEventArgs e)
+
+        private void titleInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            Create.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
+            if (linkInput.Text == "")
+            {
+                linkInput.Text = "https://www." + titleInput.Text + ".com/";
+            }
         }
 
-        private void Create_PointerExited(object sender, PointerRoutedEventArgs e)
+        private void myWebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e)
         {
-            Create.Foreground = new SolidColorBrush(Windows.UI.Colors.Blue);
+            ErrorMessage.Visibility = Visibility.Visible;
+            ErrorMessage1.Begin();
+            ErrorMessage1.RepeatBehavior = Windows.UI.Xaml.Media.Animation.RepeatBehavior.Forever;
         }
-
-        
-        
     }
 }

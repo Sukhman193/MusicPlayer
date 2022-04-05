@@ -8,10 +8,23 @@
     mc:Ignorable="d"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#FDF0D5">
+    <Page.Resources>
+        <Storyboard x:Name="ErrorMessage1">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="ErrorMessage" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                <SplineColorKeyFrame KeyTime="00:00:02" Value="#FFDA0000"/>
+                <EasingColorKeyFrame KeyTime="00:00:04" Value="Black">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseOut"/>
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
 
 
-    <Grid Background="AliceBlue">
+    <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
@@ -23,11 +36,10 @@
             <StackPanel x:Name="menuStackPanel" Height="Auto"></StackPanel>
         </Grid>
 
-
-
         <Grid Grid.Column="1" MinWidth="400" >
+
             <StackPanel x:Name="musicPanel" HorizontalAlignment="Center" Orientation="Horizontal" Padding="10">
-                <MediaPlayerElement AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True"/>
+                <MediaPlayerElement AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black"/>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" Margin="30 0 0 0" >
                     <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
                     <Button Background="MediumPurple" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40"></Button>
@@ -35,17 +47,22 @@
             </StackPanel>
 
 
-            <WebView x:Name="myWebView" NavigationStarting="myWebView_NavigationStarting" NavigationCompleted="myWebView_NavigationCompleted" Visibility="Collapsed" />
+            <WebView x:Name="myWebView" NavigationStarting="myWebView_NavigationStarting" NavigationCompleted="myWebView_NavigationCompleted" NavigationFailed="myWebView_NavigationFailed" Visibility="Collapsed" />
+
             <ProgressRing x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock x:Name="ErrorMessage" Visibility="Visible" Text="404 Page Not Found" FontSize="50" FontFamily="Segoe Print" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
 
             <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >
-                <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Cascadia Mono" Margin="10" Foreground="Black"/>
-                <TextBox x:Name="titleInput" PlaceholderText="Enter Title here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30" />
-                <TextBox x:Name="linkInput" PlaceholderText="Enter URL link here" TextAlignment="Center" FontFamily="Cascadia Mono" FontSize="30" Margin="30"/>
-                <Button x:Name="Create" Click="Create_Click" Content="Create WebView" FontSize="30" FontFamily="Cascadia Mono" Margin="10" Foreground="Black" Background="Coral" PointerEntered="Create_PointerEntered" PointerExited="Create_PointerExited"  />
+                <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Segoe Print" Margin="10" Foreground="Black"/>
+                <TextBox x:Name="titleInput" PlaceholderText="Enter Title here" TextAlignment="Center" FontFamily="Segoe Print" FontSize="30" Margin="30" LostFocus="titleInput_LostFocus" />
+                <TextBox x:Name="linkInput" PlaceholderText="Enter URL link here" TextAlignment="Center" FontFamily="Segoe Print" FontSize="30" Margin="30"/>
+                <Button x:Name="Create" Click="Create_Click" Content="Create WebView" FontSize="30" Style="{StaticResource submitButton}"/>
             </StackPanel>
 
             <StackPanel x:Name="webViewSettings" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
     </Grid>
+
+
+
 </Page>
