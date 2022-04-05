@@ -55,6 +55,8 @@ namespace MusicPlayer
                 {
                     output.Append(file.Name + "\n");
                     OutputList.Items.Add(file.Name);
+                    
+
                 }
                 
             }
@@ -62,7 +64,8 @@ namespace MusicPlayer
 
         // Play the music
         private void listBoxSongs_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
-        {           
+        {
+            
             musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[OutputList.SelectedIndex]);
         }
 
@@ -136,8 +139,8 @@ namespace MusicPlayer
 
         private void Music_Click(object sender, RoutedEventArgs e)
         {
-            musicPanel.Visibility = Visibility.Visible;
-            myWebView.Visibility = Visibility.Collapsed;
+/*            musicPanel.Visibility = Visibility.Visible;
+*/            myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
         }
@@ -157,8 +160,8 @@ namespace MusicPlayer
         private void WebViewButtonClick(object sender, RoutedEventArgs e)
         {
             webViewSettings.Children.Clear();
-            musicPanel.Visibility = Visibility.Collapsed;
-            webViewSettings.Visibility = Visibility.Collapsed;
+/*            musicPanel.Visibility = Visibility.Collapsed;
+*/            webViewSettings.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Visible;
 
@@ -208,7 +211,7 @@ namespace MusicPlayer
             titleInput.Text = "";
             linkInput.Text = "";
             webViewSettings.Children.Clear();
-            musicPanel.Visibility = Visibility.Collapsed;
+            /*musicPanel.Visibility = Visibility.Collapsed;*/
             webViewSettings.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Visible;
@@ -263,8 +266,8 @@ namespace MusicPlayer
         {
             // Hide any open page
             webViewSettings.Children.Clear();
-            musicPanel.Visibility = Visibility.Collapsed; 
-            myWebView.Visibility = Visibility.Collapsed;
+/*            musicPanel.Visibility = Visibility.Collapsed; 
+*/            myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Visible;
 
