@@ -87,7 +87,7 @@
         <Grid Grid.Column="1" MinWidth="400" >
 
             
-                <MediaPlayerElement  AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black"/>
+                <MediaPlayerElement PosterSource="/Assets/musicc.jpg"  AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black"/>
                 <StackPanel Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" Margin="30 0 0 0" >
                     <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
                     <Button Background="MediumPurple" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40"></Button>
