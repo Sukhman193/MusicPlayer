@@ -140,8 +140,9 @@ namespace MusicPlayer
 
         private void Music_Click(object sender, RoutedEventArgs e)
         {
-/*            musicPanel.Visibility = Visibility.Visible;
-*/            myWebView.Visibility = Visibility.Collapsed;
+            ErrorMessage.Visibility = Visibility.Collapsed;
+            musicPanel.Visibility = Visibility.Visible;
+            myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
         }
@@ -161,8 +162,8 @@ namespace MusicPlayer
         private void WebViewButtonClick(object sender, RoutedEventArgs e)
         {
             webViewSettings.Children.Clear();
-/*            musicPanel.Visibility = Visibility.Collapsed;
-*/            webViewSettings.Visibility = Visibility.Collapsed;
+            musicPanel.Visibility = Visibility.Collapsed;
+            webViewSettings.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Visible;
 
@@ -184,15 +185,19 @@ namespace MusicPlayer
         // This function will trigger when a webView Page starts loading
         private void myWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
+            ErrorMessage.Visibility = Visibility.Collapsed;
             progressRingWebView.Visibility = Visibility.Visible;
             myWebView.Visibility = Visibility.Collapsed;
             progressRingWebView.IsActive = true;
         }
 
+
+
         // This function will trigger when a webView Page ends loading
         private void myWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             webViewSettings.Children.Clear();
+            ErrorMessage.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
             progressRingWebView.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Visible;
@@ -212,17 +217,22 @@ namespace MusicPlayer
             titleInput.Text = "";
             linkInput.Text = "";
             webViewSettings.Children.Clear();
-            /*musicPanel.Visibility = Visibility.Collapsed;*/
+            ErrorMessage.Visibility = Visibility.Collapsed;
+            musicPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Visible;
         }
+
+
         private async void saveData(string title, string htmlLink)
         {
             string fileData = title + "/-}/" + htmlLink + "\n";
             StorageFile myFile = await localFolder.CreateFileAsync("webViewLinks.txt", CreationCollisionOption.OpenIfExists);
             await FileIO.AppendTextAsync(myFile, fileData);
         }
+
+
 
         // This function will trigger when the user clicks on the Create new link button
         private void Create_Click(object sender, RoutedEventArgs e)
@@ -263,12 +273,15 @@ namespace MusicPlayer
 
         }
 
+
+
         private void WebViewButton_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             // Hide any open page
             webViewSettings.Children.Clear();
-/*            musicPanel.Visibility = Visibility.Collapsed; 
-*/            myWebView.Visibility = Visibility.Collapsed;
+            ErrorMessage.Visibility = Visibility.Collapsed;
+            musicPanel.Visibility = Visibility.Collapsed; 
+            myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Visible;
 
@@ -348,6 +361,8 @@ namespace MusicPlayer
             throw new NotImplementedException();
         }
 
+
+
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -394,6 +409,7 @@ namespace MusicPlayer
             ErrorMessage.Visibility = Visibility.Visible;
             ErrorMessage1.Begin();
             ErrorMessage1.RepeatBehavior = Windows.UI.Xaml.Media.Animation.RepeatBehavior.Forever;
+            myWebView.Visibility = Visibility.Collapsed;
         }
     }
 }

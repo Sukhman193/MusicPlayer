@@ -6,8 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
     Background="#FDF0D5">
     <Page.Resources>
         <Storyboard x:Name="ErrorMessage1">
@@ -84,21 +82,20 @@
             <StackPanel x:Name="menuStackPanel" Height="Auto"></StackPanel>
         </Grid>
 
+
+        <Grid x:Name="musicPanel" Grid.Column="1" MinWidth="400">
+            <MediaPlayerElement PosterSource="/Assets/musicc.jpg"  AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black"/>
+            <StackPanel x:Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" >
+                <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
+                <Button x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" HorizontalAlignment="Center" Style="{StaticResource submitButton}" />
+            </StackPanel>
+        </Grid>
+
+
         <Grid Grid.Column="1" MinWidth="400" >
-
-            
-                <MediaPlayerElement PosterSource="/Assets/musicc.jpg"  AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black"/>
-                <StackPanel Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" Margin="30 0 0 0" >
-                    <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
-                    <Button Background="MediumPurple" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40"></Button>
-                </StackPanel>
-            
-
-
             <WebView x:Name="myWebView" NavigationStarting="myWebView_NavigationStarting" NavigationCompleted="myWebView_NavigationCompleted" NavigationFailed="myWebView_NavigationFailed" Visibility="Collapsed" />
-
             <ProgressRing x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <TextBlock x:Name="ErrorMessage" Visibility="Visible" Text="404 Page Not Found" FontSize="50" FontFamily="Segoe Print" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
+            <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="404 Page Not Found" FontSize="50" FontFamily="Segoe Print" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
 
             <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >
                 <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Segoe Print" Margin="10" Foreground="Black"/>

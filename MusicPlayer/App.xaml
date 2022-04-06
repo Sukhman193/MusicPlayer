@@ -76,7 +76,7 @@
         </Style>
 
         <Style x:Key="submitButton" TargetType="Button">
-            <Setter Property="Background" Value="#C1121F"/>
+            <Setter Property="Background" Value="#A503F0"/>
         <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
