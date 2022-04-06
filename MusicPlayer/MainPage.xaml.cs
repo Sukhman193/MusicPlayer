@@ -186,9 +186,11 @@ namespace MusicPlayer
         private void myWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             ErrorMessage.Visibility = Visibility.Collapsed;
-            progressRingWebView.Visibility = Visibility.Visible;
+            LoadingPanel.Visibility = Visibility.Visible;
             myWebView.Visibility = Visibility.Collapsed;
-            progressRingWebView.IsActive = true;
+            LoadingStoryBoard.Begin();
+            LoadingStoryBoard.RepeatBehavior = Windows.UI.Xaml.Media.Animation.RepeatBehavior.Forever;
+
         }
 
 
@@ -199,9 +201,9 @@ namespace MusicPlayer
             webViewSettings.Children.Clear();
             ErrorMessage.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
-            progressRingWebView.Visibility = Visibility.Collapsed;
+            LoadingPanel.Visibility = Visibility.Collapsed;
+            LoadingStoryBoard.Stop();
             myWebView.Visibility = Visibility.Visible;
-            progressRingWebView.IsActive = false;
 
             // Check if the webView can go back
             if (myWebView.CanGoBack)
@@ -264,6 +266,7 @@ namespace MusicPlayer
             Button btn = new Button
             {
                 Content = _title,
+
                 Style = Application.Current.Resources["menuButtons"] as Style,
             };
             btn.Click += WebViewButtonClick;
@@ -303,8 +306,8 @@ namespace MusicPlayer
             TextBlock textBlock = new TextBlock()
             {
                 Text = "Edit the item",
-                HorizontalAlignment =Windows.UI.Xaml.HorizontalAlignment.Center,
-                FontFamily = new FontFamily("Cascadia Mono"),
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                FontFamily = new FontFamily("Segoe Print"),
                 FontSize = 30,
                 Margin = new Thickness { Bottom = 30 },
             };
@@ -312,11 +315,11 @@ namespace MusicPlayer
             TextBox titleTextBox = new TextBox()
             {
                 Text = title,
-                PlaceholderText = "Enter the name of the title",
+                IsEnabled = false,
                 HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
                 Margin = new Thickness { Bottom = 30, Top = 30 },
                 FontSize = 30,
-                FontFamily = new FontFamily("Cascadia Mono"),
+                FontFamily = new FontFamily("Segoe Print"),
             };
 
             TextBox urlTextBox = new TextBox()
@@ -325,7 +328,7 @@ namespace MusicPlayer
                 PlaceholderText = "Enter the url",
                 HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
                 Margin = new Thickness { Bottom = 30, Top = 30 },
-                FontFamily = new FontFamily("Cascadia Mono"),
+                FontFamily = new FontFamily("Segoe Print"),
                 FontSize = 30,
 
             };
@@ -333,9 +336,9 @@ namespace MusicPlayer
             Button deleteButton = new Button()
             {
                 Content = "Delete",
-                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
                 Background = new SolidColorBrush(Windows.UI.Colors.Red),
                 Margin = new Thickness { Bottom = 30, Top = 30 },
+                Style = Application.Current.Resources["submitButton"] as Style,
             };
             deleteButton.Click += DeleteButton_Click;
 
@@ -343,7 +346,7 @@ namespace MusicPlayer
             {
                 Content = "Submit Changes",
                 HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
-                Margin = new Thickness { Bottom = 30, Top = 30 },
+                Style = Application.Current.Resources["submitButton"] as Style,
             };
             makeChanges.Click += MakeChanges_Click;
             
@@ -356,9 +359,28 @@ namespace MusicPlayer
         }
 
 
-        private void MakeChanges_Click(object sender, RoutedEventArgs e)
+        private async void MakeChanges_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+
+            Button button = (Button)sender;
+            StackPanel stackPanel = (StackPanel)button.Parent;
+            TextBox titleTextBox = (TextBox)stackPanel.Children[1];
+            TextBox urlTextBox = (TextBox)(stackPanel.Children[2]);
+
+            string title = titleTextBox.Text;
+            string url = urlTextBox.Text;
+
+            webViewLinks.Remove(webViewLinks.Find(l => l.GetTitle() == title));
+            
+            Links newalink = new Links(title, url);
+            webViewLinks.Add(newalink);
+
+            StorageFile myFile = await localFolder.CreateFileAsync("webViewLinks.txt", CreationCollisionOption.ReplaceExisting);
+
+            foreach (Links links in webViewLinks)
+            {
+                saveData(links.GetTitle(), links.GetHtmlLink());
+            }
         }
 
 
