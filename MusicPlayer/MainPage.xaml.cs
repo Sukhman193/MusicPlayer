@@ -237,7 +237,7 @@ namespace MusicPlayer
 
 
         // This function will trigger when the user clicks on the Create new link button
-        private void Create_Click(object sender, RoutedEventArgs e)
+        private async void Create_Click(object sender, RoutedEventArgs e)
         {   
             string _title = titleInput.Text;
             string _htmlLink = linkInput.Text;
@@ -251,12 +251,27 @@ namespace MusicPlayer
 
             if(_title.Trim() == "" || _titleList.Contains(_title)){
                 // create dialog box to say that we cannot use this title
+
+                ContentDialog contentDialog = new ContentDialog
+                {
+                    Title = "Title Unavailable ",
+                    Content = "Cannot use the title entered",
+                    CloseButtonText = "Okay"
+                };
+                await contentDialog.ShowAsync();
                 return;
             }
 
             if (!_htmlLink.StartsWith("http"))
             {
                 // crate dialog box to say that we cannot use this link, should start with http
+                ContentDialog contentDialog = new ContentDialog
+                {
+                    Title = "Url not recognized",
+                    Content = "Please make sure the url starts with http",
+                    CloseButtonText = "Okay"
+                };
+                await contentDialog.ShowAsync();
                 return;
             }
 
