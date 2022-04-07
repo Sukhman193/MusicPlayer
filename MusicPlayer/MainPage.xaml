@@ -6,8 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
     Background="#FDF0D5">
     <Page.Resources>
         <Storyboard x:Name="ErrorMessage1">
@@ -19,6 +17,49 @@
                         <BounceEase EasingMode="EaseOut"/>
                     </EasingColorKeyFrame.EasingFunction>
                 </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="LoadingStoryBoard">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.2000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00.2000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.4000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00.4000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.6000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00.6000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.8000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00.8000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.0000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.0000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock6" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.4000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock7" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.4000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.6000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock8" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.6000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.8000000" Value="DarkCyan"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="textBlock9" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.8000000" Value="Black"/>
+                <EasingColorKeyFrame KeyTime="00:00:02.0000000" Value="DarkCyan"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
@@ -90,21 +131,35 @@
             <StackPanel x:Name="menuStackPanel" Height="Auto"></StackPanel>
         </Grid>
 
+
+        <Grid x:Name="musicPanel" Grid.Column="1" MinWidth="400">
+            <MediaPlayerElement PosterSource="/Assets/musicc.jpg"  AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black"/>
+            <StackPanel x:Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" >
+                <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
+                <Button x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" HorizontalAlignment="Center" Style="{StaticResource submitButton}" />
+            </StackPanel>
+        </Grid>
+
+
         <Grid Grid.Column="1" MinWidth="400" >
-
-            
-                <MediaPlayerElement PosterSource="/Assets/musicc.jpg"  AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black"/>
-                <StackPanel Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" Width="300" Height="600" Margin="30 0 0 0" >
-                    <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
-                    <Button Background="MediumPurple" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40"></Button>
-                </StackPanel>
-            
-
-
             <WebView x:Name="myWebView" NavigationStarting="myWebView_NavigationStarting" NavigationCompleted="myWebView_NavigationCompleted" NavigationFailed="myWebView_NavigationFailed" Visibility="Collapsed" />
-
-            <ProgressRing x:Name="progressRingWebView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <TextBlock x:Name="ErrorMessage" Visibility="Visible" Text="404 Page Not Found" FontSize="50" FontFamily="Segoe Print" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
+            <StackPanel x:Name="LoadingPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <TextBlock x:Name="textBlock" Text="L" FontSize="50"  />
+                    <TextBlock x:Name="textBlock1" Text="o" FontSize="50" />
+                    <TextBlock x:Name="textBlock2" Text="a" FontSize="50" />
+                    <TextBlock x:Name="textBlock3" Text="d" FontSize="50" />
+                    <TextBlock x:Name="textBlock4" Text="i" FontSize="50" />
+                    <TextBlock x:Name="textBlock5" Text="n" FontSize="50" />
+                    <TextBlock x:Name="textBlock6" Text="g" FontSize="50" />
+                    <TextBlock x:Name="textBlock7" Text="." FontSize="50" />
+                    <TextBlock x:Name="textBlock8" Text="." FontSize="50" />
+                    <TextBlock x:Name="textBlock9" Text="." FontSize="50" />
+                </StackPanel>
+                <ProgressRing IsActive="True" />
+            </StackPanel>
+            
+            <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="404 Page Not Found" FontSize="50" FontFamily="Segoe Print" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
 
             <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >
                 <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Segoe Print" Margin="10" Foreground="Black"/>

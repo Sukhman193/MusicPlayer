@@ -140,8 +140,9 @@ namespace MusicPlayer
 
         private void Music_Click(object sender, RoutedEventArgs e)
         {
-/*            musicPanel.Visibility = Visibility.Visible;
-*/            myWebView.Visibility = Visibility.Collapsed;
+            ErrorMessage.Visibility = Visibility.Collapsed;
+            musicPanel.Visibility = Visibility.Visible;
+            myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
         }
@@ -161,8 +162,8 @@ namespace MusicPlayer
         private void WebViewButtonClick(object sender, RoutedEventArgs e)
         {
             webViewSettings.Children.Clear();
-/*            musicPanel.Visibility = Visibility.Collapsed;
-*/            webViewSettings.Visibility = Visibility.Collapsed;
+            musicPanel.Visibility = Visibility.Collapsed;
+            webViewSettings.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Visible;
 
@@ -184,19 +185,25 @@ namespace MusicPlayer
         // This function will trigger when a webView Page starts loading
         private void myWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
-            progressRingWebView.Visibility = Visibility.Visible;
+            ErrorMessage.Visibility = Visibility.Collapsed;
+            LoadingPanel.Visibility = Visibility.Visible;
             myWebView.Visibility = Visibility.Collapsed;
-            progressRingWebView.IsActive = true;
+            LoadingStoryBoard.Begin();
+            LoadingStoryBoard.RepeatBehavior = Windows.UI.Xaml.Media.Animation.RepeatBehavior.Forever;
+
         }
+
+
 
         // This function will trigger when a webView Page ends loading
         private void myWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             webViewSettings.Children.Clear();
+            ErrorMessage.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
-            progressRingWebView.Visibility = Visibility.Collapsed;
+            LoadingPanel.Visibility = Visibility.Collapsed;
+            LoadingStoryBoard.Stop();
             myWebView.Visibility = Visibility.Visible;
-            progressRingWebView.IsActive = false;
 
             // Check if the webView can go back
             if (myWebView.CanGoBack)
@@ -212,11 +219,14 @@ namespace MusicPlayer
             titleInput.Text = "";
             linkInput.Text = "";
             webViewSettings.Children.Clear();
-            /*musicPanel.Visibility = Visibility.Collapsed;*/
+            ErrorMessage.Visibility = Visibility.Collapsed;
+            musicPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Collapsed;
             myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Visible;
         }
+
+
         private async void saveData(string title, string htmlLink)
         {
             string fileData = title + "/-}/" + htmlLink + "\n";
@@ -224,8 +234,10 @@ namespace MusicPlayer
             await FileIO.AppendTextAsync(myFile, fileData);
         }
 
+
+
         // This function will trigger when the user clicks on the Create new link button
-        private void Create_Click(object sender, RoutedEventArgs e)
+        private async void Create_Click(object sender, RoutedEventArgs e)
         {   
             string _title = titleInput.Text;
             string _htmlLink = linkInput.Text;
@@ -239,12 +251,27 @@ namespace MusicPlayer
 
             if(_title.Trim() == "" || _titleList.Contains(_title)){
                 // create dialog box to say that we cannot use this title
+
+                ContentDialog contentDialog = new ContentDialog
+                {
+                    Title = "Title Unavailable ",
+                    Content = "Cannot use the title entered",
+                    CloseButtonText = "Okay"
+                };
+                await contentDialog.ShowAsync();
                 return;
             }
 
             if (!_htmlLink.StartsWith("http"))
             {
                 // crate dialog box to say that we cannot use this link, should start with http
+                ContentDialog contentDialog = new ContentDialog
+                {
+                    Title = "Url not recognized",
+                    Content = "Please make sure the url starts with http",
+                    CloseButtonText = "Okay"
+                };
+                await contentDialog.ShowAsync();
                 return;
             }
 
@@ -254,6 +281,7 @@ namespace MusicPlayer
             Button btn = new Button
             {
                 Content = _title,
+
                 Style = Application.Current.Resources["menuButtons"] as Style,
             };
             btn.Click += WebViewButtonClick;
@@ -263,12 +291,15 @@ namespace MusicPlayer
 
         }
 
+
+
         private void WebViewButton_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             // Hide any open page
             webViewSettings.Children.Clear();
-/*            musicPanel.Visibility = Visibility.Collapsed; 
-*/            myWebView.Visibility = Visibility.Collapsed;
+            ErrorMessage.Visibility = Visibility.Collapsed;
+            musicPanel.Visibility = Visibility.Collapsed; 
+            myWebView.Visibility = Visibility.Collapsed;
             addItemPanel.Visibility = Visibility.Collapsed;
             webViewSettings.Visibility = Visibility.Visible;
 
@@ -290,8 +321,8 @@ namespace MusicPlayer
             TextBlock textBlock = new TextBlock()
             {
                 Text = "Edit the item",
-                HorizontalAlignment =Windows.UI.Xaml.HorizontalAlignment.Center,
-                FontFamily = new FontFamily("Cascadia Mono"),
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                FontFamily = new FontFamily("Segoe Print"),
                 FontSize = 30,
                 Margin = new Thickness { Bottom = 30 },
             };
@@ -299,11 +330,11 @@ namespace MusicPlayer
             TextBox titleTextBox = new TextBox()
             {
                 Text = title,
-                PlaceholderText = "Enter the name of the title",
+                IsEnabled = false,
                 HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
                 Margin = new Thickness { Bottom = 30, Top = 30 },
                 FontSize = 30,
-                FontFamily = new FontFamily("Cascadia Mono"),
+                FontFamily = new FontFamily("Segoe Print"),
             };
 
             TextBox urlTextBox = new TextBox()
@@ -312,7 +343,7 @@ namespace MusicPlayer
                 PlaceholderText = "Enter the url",
                 HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
                 Margin = new Thickness { Bottom = 30, Top = 30 },
-                FontFamily = new FontFamily("Cascadia Mono"),
+                FontFamily = new FontFamily("Segoe Print"),
                 FontSize = 30,
 
             };
@@ -320,9 +351,9 @@ namespace MusicPlayer
             Button deleteButton = new Button()
             {
                 Content = "Delete",
-                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
                 Background = new SolidColorBrush(Windows.UI.Colors.Red),
                 Margin = new Thickness { Bottom = 30, Top = 30 },
+                Style = Application.Current.Resources["submitButton"] as Style,
             };
             deleteButton.Click += DeleteButton_Click;
 
@@ -330,7 +361,7 @@ namespace MusicPlayer
             {
                 Content = "Submit Changes",
                 HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
-                Margin = new Thickness { Bottom = 30, Top = 30 },
+                Style = Application.Current.Resources["submitButton"] as Style,
             };
             makeChanges.Click += MakeChanges_Click;
             
@@ -343,10 +374,31 @@ namespace MusicPlayer
         }
 
 
-        private void MakeChanges_Click(object sender, RoutedEventArgs e)
+        private async void MakeChanges_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+
+            Button button = (Button)sender;
+            StackPanel stackPanel = (StackPanel)button.Parent;
+            TextBox titleTextBox = (TextBox)stackPanel.Children[1];
+            TextBox urlTextBox = (TextBox)(stackPanel.Children[2]);
+
+            string title = titleTextBox.Text;
+            string url = urlTextBox.Text;
+
+            webViewLinks.Remove(webViewLinks.Find(l => l.GetTitle() == title));
+            
+            Links newalink = new Links(title, url);
+            webViewLinks.Add(newalink);
+
+            StorageFile myFile = await localFolder.CreateFileAsync("webViewLinks.txt", CreationCollisionOption.ReplaceExisting);
+
+            foreach (Links links in webViewLinks)
+            {
+                saveData(links.GetTitle(), links.GetHtmlLink());
+            }
         }
+
+
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -394,6 +446,7 @@ namespace MusicPlayer
             ErrorMessage.Visibility = Visibility.Visible;
             ErrorMessage1.Begin();
             ErrorMessage1.RepeatBehavior = Windows.UI.Xaml.Media.Animation.RepeatBehavior.Forever;
+            myWebView.Visibility = Visibility.Collapsed;
         }
     }
 }
