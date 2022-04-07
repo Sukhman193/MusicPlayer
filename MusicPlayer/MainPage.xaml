@@ -39,6 +39,9 @@
                         <Setter Target="PickFilesButton.Width" Value="33px"></Setter>
                         <Setter Target="OutputList.Height" Value="275px"></Setter>
                         <Setter Target="OutputList.Width" Value="100px"></Setter>
+
+                        <Setter Target="musicPlayerElement.Height" Value="300px"></Setter>
+                        <Setter Target="musicPlayerElement.Width" Value="166px"></Setter>
                         
                         
                     </VisualState.Setters>
@@ -56,12 +59,15 @@
                         <Setter Target="PickFilesButton.Width" Value="50px"></Setter>
                         <Setter Target="OutputList.Height" Value="412px"></Setter>
                         <Setter Target="OutputList.Width" Value="150px"></Setter>
+                        
+                        <Setter Target="musicPlayerElement.Height" Value="450px"></Setter>
+                        <Setter Target="musicPlayerElement.Width" Value="250px"></Setter>
                     </VisualState.Setters>
                     
                 </VisualState>
                 <VisualState x:Name="Desktop">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1008"/>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="list.Height" Value="600px">
