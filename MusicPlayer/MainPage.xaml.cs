@@ -54,9 +54,11 @@ namespace MusicPlayer
                 StringBuilder output = new StringBuilder("Picked Files:\n");
                 foreach (StorageFile file in files)
                 {
-                    output.Append(file.Name + "\n");
-                    OutputList.Items.Add(file.Name);
-                    
+                    String temp = file.Name;
+                    temp = temp.ToString().Replace(".mp3", "");
+                    //output.Append(temp + "\n");
+                    OutputList.Items.Add(temp);
+
 
                 }
                 
