@@ -73,16 +73,22 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="list.Height" Value="300px"></Setter>
-                        <Setter Target="list.Width" Value="100px"></Setter>
-                        <Setter Target="list.Margin" Value="0 0 20 0"></Setter>
-                        <Setter Target="PickFilesButton.Height" Value="20px"></Setter>
-                        <Setter Target="PickFilesButton.Width" Value="33px"></Setter>
-                        <Setter Target="OutputList.Height" Value="275px"></Setter>
-                        <Setter Target="OutputList.Width" Value="100px"></Setter>
 
-                        <Setter Target="musicPlayerElement.Height" Value="300px"></Setter>
-                        <Setter Target="musicPlayerElement.Width" Value="166px"></Setter>
+                        <Setter Target="OutputList.Height" Value="127" />
+                        <Setter Target="OutputList.Width" Value="275" />
+                        <Setter Target="OutputList.Margin" Value="0 0 0 50"/>
+                        <Setter Target="OutputList.CornerRadius" Value="20"/>
+
+
+                        <Setter Target="musicPlayerElement.Width" Value="380"/>
+                        <Setter Target="musicPlayerElement.Height" Value="450"/>
+                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Top"/>
+                        <Setter Target="musicPlayerElement.Margin" Value="0 50 0 0"/>
+
+
+                        <Setter Target="list.Orientation" Value="Horizontal"></Setter>
+                        <Setter Target="list.VerticalAlignment" Value="Bottom"></Setter>
+                        <Setter Target="list.HorizontalAlignment" Value="Center"></Setter>
                         
                         
                     </VisualState.Setters>
@@ -93,24 +99,57 @@
                         <AdaptiveTrigger MinWindowWidth="641"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="list.Height" Value="450px"></Setter>
-                        <Setter Target="list.Width" Value="150px"></Setter>
-                        <Setter Target="list.Margin" Value="0 0 20 0"></Setter>
-                        <Setter Target="PickFilesButton.Height" Value="30px"></Setter>
-                        <Setter Target="PickFilesButton.Width" Value="50px"></Setter>
-                        <Setter Target="OutputList.Height" Value="412px"></Setter>
-                        <Setter Target="OutputList.Width" Value="150px"></Setter>
-                        
-                        <Setter Target="musicPlayerElement.Height" Value="450px"></Setter>
-                        <Setter Target="musicPlayerElement.Width" Value="250px"></Setter>
+                        <Setter Target="OutputList.Height" Value="127" />
+                        <Setter Target="OutputList.Width" Value="475" />
+                        <Setter Target="OutputList.Margin" Value="0 0 0 35"/>
+                        <Setter Target="OutputList.CornerRadius" Value="20"/>
+
+
+                        <Setter Target="musicPlayerElement.Width" Value="380"/>
+                        <Setter Target="musicPlayerElement.Height" Value="450"/>
+                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Top"/>
+                        <Setter Target="musicPlayerElement.Margin" Value="0 50 55 0"/>
+
+
+                        <Setter Target="list.Orientation" Value="Horizontal"></Setter>
+                        <Setter Target="list.VerticalAlignment" Value="Bottom"></Setter>
+                        <Setter Target="list.HorizontalAlignment" Value="Center"></Setter>
                     </VisualState.Setters>
                     
                 </VisualState>
-                <VisualState x:Name="Desktop">
+                <VisualState x:Name="Tablet2">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
+                        <AdaptiveTrigger MinWindowWidth="976"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="OutputList.Height" Value="127" />
+                        <Setter Target="OutputList.Width" Value="775" />
+                        <Setter Target="OutputList.Margin" Value="0 0 0 15"/>
+                        <Setter Target="OutputList.CornerRadius" Value="20"/>
+
+
+                        <Setter Target="musicPlayerElement.Width" Value="480"/>
+                        <Setter Target="musicPlayerElement.Height" Value="550"/>
+                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Top"/>
+                        <Setter Target="musicPlayerElement.Margin" Value="0 50 55 0"/>
+
+
+                        <Setter Target="list.Orientation" Value="Horizontal"></Setter>
+                        <Setter Target="list.VerticalAlignment" Value="Bottom"></Setter>
+                        <Setter Target="list.HorizontalAlignment" Value="Center"></Setter>
+                    </VisualState.Setters>
+
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1250"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="musicPlayerElement.Width" Value="720"/>
+                        <Setter Target="musicPlayerElement.Height" Value="750"/>
+                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Center"/>
+                        <Setter Target="musicPlayerElement.Margin" Value="0 0 0 75"/>
+                        
                         <Setter Target="list.Height" Value="600px">
                         </Setter>
                         <Setter Target="list.Width" Value="300px"></Setter>
@@ -133,10 +172,10 @@
 
 
         <Grid x:Name="musicPanel" Grid.Column="1" MinWidth="400">
-            <MediaPlayerElement PosterSource="/Assets/musicc.jpg"  AutoPlay="True" x:Name="musicPlayerElement" Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black"/>
-            <StackPanel x:Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" >
-                <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300"></ListBox>
-                <Button x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" HorizontalAlignment="Center" Style="{StaticResource submitButton}" />
+            <MediaPlayerElement x:Name="musicPlayerElement" PosterSource="/Assets/musicc.jpg"  AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black" />
+            <StackPanel x:Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" Spacing="10" >
+                <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300" CornerRadius="20" ></ListBox>
+                <Button MinWidth="100" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" HorizontalAlignment="Center" Style="{StaticResource submitButton}" />
             </StackPanel>
         </Grid>
 
