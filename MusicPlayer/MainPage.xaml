@@ -174,7 +174,13 @@
 
 
         <Grid x:Name="musicPanel" Grid.Column="1" MinWidth="400">
-            <MediaPlayerElement x:Name="musicPlayerElement" PosterSource="/Assets/musicc.jpg"  AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black" />
+            <MediaPlayerElement x:Name="musicPlayerElement" PosterSource="/Assets/musicc.jpg"  AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black">
+                <MediaPlayerElement.TransportControls>
+                    <MediaTransportControls IsFullWindowButtonVisible="False" IsPlaybackRateButtonVisible="False" IsRepeatButtonVisible="True" IsStopButtonVisible="True" IsRepeatEnabled="True" IsStopEnabled="True"/>
+                    
+                </MediaPlayerElement.TransportControls>
+                
+            </MediaPlayerElement>
             <StackPanel x:Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" Spacing="10" >
                 <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300" CornerRadius="20" ></ListBox>
                 <Button MinWidth="100" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" HorizontalAlignment="Center" Style="{StaticResource submitButton}" />

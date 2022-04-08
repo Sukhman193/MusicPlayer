@@ -40,10 +40,12 @@ namespace MusicPlayer
             retrieveData();
         }
 
+        
 
         // Pick the music library using FileOpenPicker();
         private async void PickFilesButton_Click(object sender, RoutedEventArgs e)
         {
+            
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.List;
             openPicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
