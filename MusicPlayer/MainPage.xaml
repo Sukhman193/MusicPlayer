@@ -5,10 +5,10 @@
     xmlns:local="using:MusicPlayer"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="helloSukh"
+    x:Name="webPlayer"
     mc:Ignorable="d"
-    Background="#FDF0D5">
-    
+    Background="#FDF0D5" FontFamily="Segoe Print" >
+
     <Page.Resources>
         <Storyboard x:Name="ErrorMessage1">
             <ColorAnimationUsingKeyFrames Storyboard.TargetName="ErrorMessage" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
@@ -78,87 +78,65 @@
 
                         <Setter Target="OutputList.Height" Value="127" />
                         <Setter Target="OutputList.Width" Value="275" />
-                        <Setter Target="OutputList.Margin" Value="0 0 0 50"/>
                         <Setter Target="OutputList.CornerRadius" Value="20"/>
 
 
                         <Setter Target="musicPlayerElement.Width" Value="380"/>
                         <Setter Target="musicPlayerElement.Height" Value="450"/>
                         <Setter Target="musicPlayerElement.VerticalAlignment" Value="Top"/>
-                        <Setter Target="musicPlayerElement.Margin" Value="0 50 0 0"/>
 
 
                         <Setter Target="list.Orientation" Value="Horizontal"></Setter>
                         <Setter Target="list.VerticalAlignment" Value="Bottom"></Setter>
                         <Setter Target="list.HorizontalAlignment" Value="Center"></Setter>
-                        
-                        
+
+
                     </VisualState.Setters>
-                    
+
                 </VisualState>
                 <VisualState x:Name="Tablet">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="641"/>
+                        <AdaptiveTrigger MinWindowWidth="641" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="OutputList.Height" Value="127" />
                         <Setter Target="OutputList.Width" Value="475" />
-                        <Setter Target="OutputList.Margin" Value="0 0 0 35"/>
                         <Setter Target="OutputList.CornerRadius" Value="20"/>
 
 
                         <Setter Target="musicPlayerElement.Width" Value="380"/>
                         <Setter Target="musicPlayerElement.Height" Value="450"/>
                         <Setter Target="musicPlayerElement.VerticalAlignment" Value="Top"/>
-                        <Setter Target="musicPlayerElement.Margin" Value="0 50 55 0"/>
 
 
                         <Setter Target="list.Orientation" Value="Horizontal"></Setter>
                         <Setter Target="list.VerticalAlignment" Value="Bottom"></Setter>
                         <Setter Target="list.HorizontalAlignment" Value="Center"></Setter>
                     </VisualState.Setters>
-                    
+
                 </VisualState>
                 <VisualState x:Name="Tablet2">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="976"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="OutputList.Height" Value="127" />
-                        <Setter Target="OutputList.Width" Value="775" />
-                        <Setter Target="OutputList.Margin" Value="0 0 0 15"/>
+                        <Setter Target="OutputList.Height" Value="500" />
+                        <Setter Target="OutputList.Width" Value="200" />
                         <Setter Target="OutputList.CornerRadius" Value="20"/>
 
 
                         <Setter Target="musicPlayerElement.Width" Value="480"/>
                         <Setter Target="musicPlayerElement.Height" Value="550"/>
-                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Top"/>
-                        <Setter Target="musicPlayerElement.Margin" Value="0 50 55 0"/>
+                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Center" />
 
+                        <Setter Target="musicAndListPanel.Orientation" Value="Horizontal" />
 
-                        <Setter Target="list.Orientation" Value="Horizontal"></Setter>
-                        <Setter Target="list.VerticalAlignment" Value="Bottom"></Setter>
-                        <Setter Target="list.HorizontalAlignment" Value="Center"></Setter>
+                        <Setter Target="list.Orientation" Value="Vertical" />
+                        <Setter Target="list.VerticalAlignment" Value="Center" />
                     </VisualState.Setters>
 
                 </VisualState>
-                <VisualState x:Name="Desktop">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1250"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="musicPlayerElement.Width" Value="720"/>
-                        <Setter Target="musicPlayerElement.Height" Value="750"/>
-                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Center"/>
-                        <Setter Target="musicPlayerElement.Margin" Value="0 0 75 75"/>
-                        
-                        <Setter Target="list.Height" Value="600px">
-                        </Setter>
-                        <Setter Target="list.Width" Value="300px"></Setter>
-                        <Setter Target="list.Margin" Value="0 0 20 0"></Setter>
-                    </VisualState.Setters>
-                    
-                </VisualState>
+
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
@@ -175,17 +153,19 @@
 
         <Grid x:Name="musicPanel" Grid.Column="1" MinWidth="400">
 
-            <ToggleSwitch Toggled="color_mode_Toggled" VerticalAlignment="Top" HorizontalAlignment="Right" CornerRadius="25" Background="#FDF0D5" x:Name="color_mode" Margin="5" OffContent="Dark Mode" OnContent="Light Mode" ></ToggleSwitch>
-            <MediaPlayerElement Style="{StaticResource poster1}" x:Name="musicPlayerElement" AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black">
-                <MediaPlayerElement.TransportControls>
-                    <MediaTransportControls IsFullWindowButtonVisible="False" IsPlaybackRateButtonVisible="False" IsRepeatButtonVisible="True" IsStopButtonVisible="True" IsRepeatEnabled="True" IsStopEnabled="True"/>
-                    
-                </MediaPlayerElement.TransportControls>
-                
-            </MediaPlayerElement>
-            <StackPanel x:Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" Spacing="10" >
-                <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList"  VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300" CornerRadius="20" ></ListBox>
-                <Button MinWidth="100" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" HorizontalAlignment="Center" Style="{StaticResource submitButton}" />
+            <ToggleSwitch x:Name="color_mode" Toggled="color_mode_Toggled" VerticalAlignment="Top" HorizontalAlignment="Right" CornerRadius="25" Margin="5" OffContent="Dark Mode" OnContent="Light Mode" Foreground="Black" >
+            </ToggleSwitch>
+            <StackPanel x:Name="musicAndListPanel" Spacing="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                <MediaPlayerElement Style="{StaticResource poster1}" x:Name="musicPlayerElement" AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black">
+                    <MediaPlayerElement.TransportControls>
+                        <MediaTransportControls IsFullWindowButtonVisible="False" IsPlaybackRateButtonVisible="False" IsZoomButtonVisible="False"  IsRepeatButtonVisible="True" IsStopButtonVisible="True" IsRepeatEnabled="True" IsStopEnabled="True"/>
+                    </MediaPlayerElement.TransportControls>
+                </MediaPlayerElement>
+
+                <StackPanel x:Name="list" Spacing="10" >
+                    <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList"  VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300" CornerRadius="20" ></ListBox>
+                    <Button MinWidth="100" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" HorizontalAlignment="Center" Style="{StaticResource submitButton}" />
+                </StackPanel>
             </StackPanel>
         </Grid>
 
@@ -207,7 +187,7 @@
                 </StackPanel>
                 <ProgressRing IsActive="True" />
             </StackPanel>
-            
+
             <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="404 Page Not Found" FontSize="50" FontFamily="Segoe Print" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
 
             <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >

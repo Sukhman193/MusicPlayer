@@ -29,9 +29,9 @@ namespace MusicPlayer
     public sealed partial class MainPage : Page
     {
         List<Links> webViewLinks;
-        List<StorageFile> listofitems;
+        List<StorageFile> listOfSongs;
         Button goBackButton;
-        Button button1;
+        Button navigateToMusicButton;
         Button addItem;
         StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;      // Put this with the other function
         IReadOnlyList<StorageFile> files;
@@ -41,7 +41,7 @@ namespace MusicPlayer
         {
             this.InitializeComponent();
             retrieveData();
-            listofitems = new List<StorageFile>();
+            listOfSongs = new List<StorageFile>();
         }
 
         
@@ -70,7 +70,7 @@ namespace MusicPlayer
                     OutputList.Items.Add(temp);
 
 
-                    listofitems.Add(file);
+                    listOfSongs.Add(file);
                 }
                 
                 
@@ -78,23 +78,11 @@ namespace MusicPlayer
             
         }
 
-        // Play the music
+        // Play the music by searching the index
         private void listBoxSongs_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             int ind = OutputList.SelectedIndex;
-            String n = OutputList.SelectedItem.ToString();
-            /*for (int i = 0; i < listofitems.Count; i++)
-            {
-                if (listofitems[i].Equals(n))
-                {
-                    musicPlayerElement.Source = MediaSource.CreateFromStorageFile(listofitems[i]);
-                }
-            }*/
-            musicPlayerElement.Source = MediaSource.CreateFromStorageFile(listofitems[ind]);
-
-
-
-
+            musicPlayerElement.Source = MediaSource.CreateFromStorageFile(listOfSongs[ind]);
         }
 
        
@@ -110,7 +98,15 @@ namespace MusicPlayer
                 Links currentLink = new Links(stringSplit[0], stringSplit[1]);
                 webViewLinks.Add(currentLink);
             }
-            createButtons();
+            if (color_mode.IsOn)
+            {
+                createButtons(Application.Current.Resources["menuButtons2"] as Style);
+            }
+            else
+            {
+                createButtons(Application.Current.Resources["menuButtons"] as Style);
+            }
+            
         }
 
         //Hex COlor
@@ -124,6 +120,7 @@ namespace MusicPlayer
             SolidColorBrush myBrush = new SolidColorBrush(Windows.UI.Color.FromArgb(a, r, g, b));
             return myBrush;
         }
+
         private void color_mode_Toggled(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
@@ -132,7 +129,7 @@ namespace MusicPlayer
                 if(toggleSwitch.IsOn == true)
                 {
                     menuStackPanel.Children.Clear();
-                    helloSukh.Background = GetSolidColorBrush("#FF0E1314");
+                    webPlayer.Background = GetSolidColorBrush("#FF0E1314");
                     menuGrid.Background = GetSolidColorBrush("#FF050401");
                     OutputList.Background = GetSolidColorBrush("#FF102521");
                     color_mode.Background = GetSolidColorBrush("#FF0E1314");
@@ -141,14 +138,12 @@ namespace MusicPlayer
                     color_mode.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
                     putLinkHere.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
 
-
-
-                    createButtons2();
+                    createButtons(Application.Current.Resources["menuButtons2"] as Style);
                 }
                 else
                 {
                     menuStackPanel.Children.Clear();
-                    helloSukh.Background = GetSolidColorBrush("#FFFDF0D5");
+                    webPlayer.Background = GetSolidColorBrush("#FFFDF0D5");
                     menuGrid.Background = new SolidColorBrush(Windows.UI.Colors.CornflowerBlue);
                     OutputList.Background = new SolidColorBrush(Windows.UI.Colors.White);
                     color_mode.Background = GetSolidColorBrush("#FFFDF0D5");
@@ -157,99 +152,44 @@ namespace MusicPlayer
                     color_mode.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
                     putLinkHere.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
 
-                    createButtons();
+                    createButtons(Application.Current.Resources["menuButtons"] as Style);
                 }
             }
-            
-           
-
-            /*var arr = menuStackPanel.Children.ToArray();
-            for(int i = 0; i < arr.Length; i++)
-            {
-                
-            }*/
-        }
-        private void createButtons2()
-        {
-            goBackButton = new Button
-            {
-                Content = "",
-                Name = "goBack",
-                FontFamily = new FontFamily("Segoe MDL2 Assets"),
-                IsEnabled = false,
-                Style = Application.Current.Resources["menuButtons2"] as Style,
-            };
-            goBackButton.Click += GoBackButtonClick;
-            menuStackPanel.Children.Add(goBackButton);
-
-
-            button1 = new Button
-            {
-                Content = "Music",
-                Name = "Music",
-                Style = Application.Current.Resources["menuButtons2"] as Style
-            };
-            button1.Click += Music_Click;
-            menuStackPanel.Children.Add(button1);
-
-
-            foreach (Links link in webViewLinks)
-            {
-                Button btn = new Button
-                {
-                    Content = link.GetTitle(),
-                    Style = Application.Current.Resources["menuButtons2"] as Style
-                };
-                btn.Click += WebViewButtonClick;
-                btn.RightTapped += WebViewButton_RightTapped;
-                btn.HorizontalAlignment = HorizontalAlignment.Center;
-                menuStackPanel.Children.Add((btn));
-            }
-
-            addItem = new Button
-            {
-                Content = "+",
-                FontSize = 25,
-                VerticalAlignment = VerticalAlignment.Bottom,
-                Style = Application.Current.Resources["menuButtons2"] as Style
-            };
-            addItem.Click += AddItem_Click;
-            menuGrid.Children.Add(addItem);
 
         }
-
 
         // The following function will create the necessary buttons from the data retrieved
-        private void createButtons()
+        private void createButtons(Style buttonStyle)
         {
+            // Create the go back Button
             goBackButton = new Button
             {
                 Content = "",
                 Name = "goBack",
                 FontFamily = new FontFamily("Segoe MDL2 Assets"),
                 IsEnabled = false,
-                Style = Application.Current.Resources["menuButtons"] as Style,
+                Style = buttonStyle
             };
             goBackButton.Click += GoBackButtonClick;
             menuStackPanel.Children.Add(goBackButton);
 
-            
-            button1 = new Button
+            // Create the navigate to music button
+            navigateToMusicButton = new Button
             {
                 Content = "Music",
                 Name = "Music",
-                Style = Application.Current.Resources["menuButtons"] as Style
+                Style = buttonStyle
             };
-            button1.Click += Music_Click;
-            menuStackPanel.Children.Add(button1);
+            navigateToMusicButton.Click += Music_Click;
+            menuStackPanel.Children.Add(navigateToMusicButton);
 
-
+            // Create the webView Buttons
             foreach (Links link in webViewLinks)
             {
                 Button btn = new Button
                 {
                     Content = link.GetTitle(),
-                    Style = Application.Current.Resources["menuButtons"] as Style
+                    Style = buttonStyle
                 };
                 btn.Click += WebViewButtonClick;
                 btn.RightTapped += WebViewButton_RightTapped;
@@ -257,18 +197,20 @@ namespace MusicPlayer
                 menuStackPanel.Children.Add((btn));
             }
 
+            // Create the add new webView button
             addItem = new Button
             {
                 Content = "+",
                 FontSize = 25,
                 VerticalAlignment = VerticalAlignment.Bottom,
-                Style = Application.Current.Resources["menuButtons"] as Style
+                Style = buttonStyle
             };
             addItem.Click += AddItem_Click;
             menuGrid.Children.Add(addItem);
-            
-        }
 
+        }
+       
+        // This function will run when the user clicks on the Music Button
         private void Music_Click(object sender, RoutedEventArgs e)
         {
             ErrorMessage.Visibility = Visibility.Collapsed;
@@ -288,6 +230,7 @@ namespace MusicPlayer
                 goBackButton.IsEnabled = false; 
             }
         }
+
 
         // this function will trigger when the user selectrs a page to open
         private void WebViewButtonClick(object sender, RoutedEventArgs e)
@@ -357,7 +300,7 @@ namespace MusicPlayer
             addItemPanel.Visibility = Visibility.Visible;
         }
 
-
+        // This function will save the data to loacal Storage
         private async void saveData(string title, string htmlLink)
         {
             string fileData = title + "/-}/" + htmlLink + "\n";
@@ -409,37 +352,29 @@ namespace MusicPlayer
             saveData(_title, _htmlLink);
             Links newLink = new Links(_title, _htmlLink);
             webViewLinks.Add(newLink);
-            if(color_mode.IsOn == true){
-                Button btn = new Button
-                {
-                    Content = _title,
 
-                    Style = Application.Current.Resources["menuButtons2"] as Style,
-                };
-                btn.Click += WebViewButtonClick;
-                btn.IsRightTapEnabled = true;
-                btn.RightTapped += WebViewButton_RightTapped;
-                menuStackPanel.Children.Add((btn));
+            Button btn = new Button
+            {
+                Content = _title
+            };
+            btn.Click += WebViewButtonClick;
+            btn.IsRightTapEnabled = true;
+            btn.RightTapped += WebViewButton_RightTapped;
+            menuStackPanel.Children.Add((btn));
+
+            // Set the style depending on the switch
+            if (color_mode.IsOn == true){
+                btn.Style = Application.Current.Resources["menuButtons2"] as Style;
             }
             else
             {
-                Button btn = new Button
-                {
-                    Content = _title,
-
-                    Style = Application.Current.Resources["menuButtons"] as Style,
-                };
-                btn.Click += WebViewButtonClick;
-                btn.IsRightTapEnabled = true;
-                btn.RightTapped += WebViewButton_RightTapped;
-                menuStackPanel.Children.Add((btn));
+                btn.Style = Application.Current.Resources["menuButtons"] as Style;
             }
             
 
         }
-
-
-
+        
+        // When the user right clicks on a webViewButton
         private void WebViewButton_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             // Hide any open page
@@ -520,7 +455,7 @@ namespace MusicPlayer
             webViewSettings.Children.Add(makeChanges);
         }
 
-
+        // This function will run when the user makes changes to a Web View
         private async void MakeChanges_Click(object sender, RoutedEventArgs e)
         {
 
@@ -546,7 +481,7 @@ namespace MusicPlayer
         }
 
 
-
+        // This function will trigger when the user wants to delete a webView
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -579,7 +514,7 @@ namespace MusicPlayer
             
         }
 
-
+        // This function will help the user get a correct format depending on the title they give for a webview
         private void titleInput_LostFocus(object sender, RoutedEventArgs e)
         {
             if (linkInput.Text == "")
@@ -588,6 +523,7 @@ namespace MusicPlayer
             }
         }
 
+        // This function will trigger if the site is not reachable 
         private void myWebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e)
         {
             ErrorMessage.Visibility = Visibility.Visible;
