@@ -29,6 +29,7 @@ namespace MusicPlayer
     public sealed partial class MainPage : Page
     {
         List<Links> webViewLinks;
+        List<StorageFile> listofitems;
         Button goBackButton;
         Button button1;
         Button addItem;
@@ -40,6 +41,7 @@ namespace MusicPlayer
         {
             this.InitializeComponent();
             retrieveData();
+            listofitems = new List<StorageFile>();
         }
 
         
@@ -49,32 +51,50 @@ namespace MusicPlayer
         {
             
             FileOpenPicker openPicker = new FileOpenPicker();
+            List<StorageFile> temporaryArr = new List<StorageFile>();
+            
             openPicker.ViewMode = PickerViewMode.List;
             openPicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
             openPicker.FileTypeFilter.Add(".mp3");
             files = await openPicker.PickMultipleFilesAsync();
+            
             if(files.Count > 0)
             {
                 StringBuilder output = new StringBuilder("Picked Files:\n");
                 foreach (StorageFile file in files)
                 {
+                    temporaryArr.Add(file);
                     String temp = file.Name;
                     temp = temp.ToString().Replace(".mp3", "");
-                    //output.Append(temp + "\n");
+                    output.Append(temp + "\n");
                     OutputList.Items.Add(temp);
 
 
+                    listofitems.Add(file);
                 }
                 
+                
             }
+            
         }
 
         // Play the music
         private void listBoxSongs_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[OutputList.SelectedIndex]);
-            
+            int ind = OutputList.SelectedIndex;
+            String n = OutputList.SelectedItem.ToString();
+            /*for (int i = 0; i < listofitems.Count; i++)
+            {
+                if (listofitems[i].Equals(n))
+                {
+                    musicPlayerElement.Source = MediaSource.CreateFromStorageFile(listofitems[i]);
+                }
+            }*/
+            musicPlayerElement.Source = MediaSource.CreateFromStorageFile(listofitems[ind]);
+
+
+
+
         }
 
        

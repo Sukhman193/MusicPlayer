@@ -176,7 +176,7 @@
         <Grid x:Name="musicPanel" Grid.Column="1" MinWidth="400">
 
             <ToggleSwitch Toggled="color_mode_Toggled" VerticalAlignment="Top" HorizontalAlignment="Right" CornerRadius="25" Background="#FDF0D5" x:Name="color_mode" Margin="5" OffContent="Dark Mode" OnContent="Light Mode" ></ToggleSwitch>
-            <MediaPlayerElement Style="{StaticResource poster1}" x:Name="musicPlayerElement"  AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black">
+            <MediaPlayerElement Style="{StaticResource poster1}" x:Name="musicPlayerElement" AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black">
                 <MediaPlayerElement.TransportControls>
                     <MediaTransportControls IsFullWindowButtonVisible="False" IsPlaybackRateButtonVisible="False" IsRepeatButtonVisible="True" IsStopButtonVisible="True" IsRepeatEnabled="True" IsStopEnabled="True"/>
                     
@@ -184,7 +184,7 @@
                 
             </MediaPlayerElement>
             <StackPanel x:Name="list" VerticalAlignment="Center" HorizontalAlignment="Right" Spacing="10" >
-                <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList" VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300" CornerRadius="20" ></ListBox>
+                <ListBox SelectionChanged="listBoxSongs_SelectedIndexChanged" x:Name="OutputList"  VerticalAlignment="Top" HorizontalAlignment="Center" Height="550" Width="300" CornerRadius="20" ></ListBox>
                 <Button MinWidth="100" x:Name="PickFilesButton" Content="Pick Files" Click="PickFilesButton_Click" HorizontalAlignment="Center" Style="{StaticResource submitButton}" />
             </StackPanel>
         </Grid>
