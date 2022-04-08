@@ -6,7 +6,7 @@
 
     <Application.Resources>
         <Style x:Key="menuButtons" TargetType="Button">
-            <Setter Property="Background" Value="#003049"/>
+            <Setter Property="Background" Value="#003049" />
             <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>

@@ -5,8 +5,10 @@
     xmlns:local="using:MusicPlayer"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="helloSukh"
     mc:Ignorable="d"
     Background="#FDF0D5">
+    
     <Page.Resources>
         <Storyboard x:Name="ErrorMessage1">
             <ColorAnimationUsingKeyFrames Storyboard.TargetName="ErrorMessage" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
@@ -148,7 +150,7 @@
                         <Setter Target="musicPlayerElement.Width" Value="720"/>
                         <Setter Target="musicPlayerElement.Height" Value="750"/>
                         <Setter Target="musicPlayerElement.VerticalAlignment" Value="Center"/>
-                        <Setter Target="musicPlayerElement.Margin" Value="0 0 0 75"/>
+                        <Setter Target="musicPlayerElement.Margin" Value="0 0 75 75"/>
                         
                         <Setter Target="list.Height" Value="600px">
                         </Setter>

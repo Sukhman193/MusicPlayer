@@ -70,6 +70,7 @@ namespace MusicPlayer
         {
             
             musicPlayerElement.Source = MediaSource.CreateFromStorageFile(files[OutputList.SelectedIndex]);
+            
         }
 
        
