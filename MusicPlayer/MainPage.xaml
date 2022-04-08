@@ -104,9 +104,11 @@
                         <Setter Target="OutputList.CornerRadius" Value="20"/>
 
 
-                        <Setter Target="musicPlayerElement.Width" Value="380"/>
-                        <Setter Target="musicPlayerElement.Height" Value="450"/>
+                        <Setter Target="musicPlayerElement.MinWidth" Value="485"/>
+                        <Setter Target="musicPlayerElement.MinHeight" Value="485"/>
+                        <Setter Target="musicPlayerElement.HorizontalAlignment" Value="Left"/>
                         <Setter Target="musicPlayerElement.VerticalAlignment" Value="Top"/>
+                        
 
 
                         <Setter Target="list.Orientation" Value="Horizontal"></Setter>
@@ -125,9 +127,10 @@
                         <Setter Target="OutputList.CornerRadius" Value="20"/>
 
 
-                        <Setter Target="musicPlayerElement.Width" Value="480"/>
+                        <Setter Target="musicPlayerElement.Width" Value="550"/>
                         <Setter Target="musicPlayerElement.Height" Value="550"/>
-                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Center" />
+                        <Setter Target="musicPlayerElement.VerticalAlignment" Value="Top" />
+                        <Setter Target="musicPlayerElement.HorizontalAlignment" Value="Left" />
 
                         <Setter Target="musicAndListPanel.Orientation" Value="Horizontal" />
 
