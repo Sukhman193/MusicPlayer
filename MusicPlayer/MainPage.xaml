@@ -174,7 +174,9 @@
 
 
         <Grid x:Name="musicPanel" Grid.Column="1" MinWidth="400">
-            <MediaPlayerElement x:Name="musicPlayerElement" PosterSource="/Assets/musicc.jpg"  AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black">
+
+            <ToggleSwitch Toggled="color_mode_Toggled" VerticalAlignment="Top" HorizontalAlignment="Right" CornerRadius="25" Background="#FDF0D5" x:Name="color_mode" Margin="5" OffContent="Dark Mode" OnContent="Light Mode" ></ToggleSwitch>
+            <MediaPlayerElement Style="{StaticResource poster1}" x:Name="musicPlayerElement"  AutoPlay="True"  Height="600" Width="500" AreTransportControlsEnabled="True" Foreground="Black">
                 <MediaPlayerElement.TransportControls>
                     <MediaTransportControls IsFullWindowButtonVisible="False" IsPlaybackRateButtonVisible="False" IsRepeatButtonVisible="True" IsStopButtonVisible="True" IsRepeatEnabled="True" IsStopEnabled="True"/>
                     
@@ -209,10 +211,10 @@
             <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="404 Page Not Found" FontSize="50" FontFamily="Segoe Print" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
 
             <StackPanel x:Name="addItemPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >
-                <TextBlock Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Segoe Print" Margin="10" Foreground="Black"/>
+                <TextBlock x:Name="putLinkHere" Text="Add a new Link" HorizontalAlignment="Center" FontSize="30" FontFamily="Segoe Print" Margin="10" Foreground="Black"/>
                 <TextBox x:Name="titleInput" PlaceholderText="Enter Title here" TextAlignment="Center" FontFamily="Segoe Print" FontSize="30" Margin="30" LostFocus="titleInput_LostFocus" />
                 <TextBox x:Name="linkInput" PlaceholderText="Enter URL link here" TextAlignment="Center" FontFamily="Segoe Print" FontSize="30" Margin="30"/>
-                <Button x:Name="Create" Click="Create_Click" Content="Create WebView" FontSize="30" Style="{StaticResource submitButton}"/>
+                <Button x:Name="Create" Click="Create_Click" Content="Create WebView" FontSize="30" Style="{StaticResource submitButton2}"/>
             </StackPanel>
 
             <StackPanel x:Name="webViewSettings" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" />

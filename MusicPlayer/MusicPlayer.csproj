@@ -131,6 +131,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\green-music.jpg" />
+    <Content Include="Assets\green-music2.jpg" />
+    <Content Include="Assets\green-music4.jpg" />
     <Content Include="Assets\musicc.jpg" />
     <Content Include="Assets\smile.png" />
     <Content Include="Properties\Default.rd.xml" />
