@@ -408,6 +408,14 @@ namespace MusicPlayer
                 FontSize = 30,
                 Margin = new Thickness { Bottom = 30 },
             };
+            if (!color_mode.IsOn)
+            {
+                textBlock.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
+            }
+            else
+            {
+                textBlock.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+            }
 
             TextBox titleTextBox = new TextBox()
             {
